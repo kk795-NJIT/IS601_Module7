@@ -2,6 +2,16 @@
 
 A containerized Python application that generates QR codes from URLs using Docker.
 
+## Quick Start with DockerHub
+
+The image is already built and available on DockerHub! Pull and run directly:
+
+```bash
+docker run -d --name qr-generator kk795/qr-code-generator-app
+```
+
+**DockerHub Repository**: https://hub.docker.com/r/kk795/qr-code-generator-app
+
 ## Features
 
 - Generates QR codes from URLs
