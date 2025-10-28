@@ -69,14 +69,16 @@ docker run -d --name qr-generator \
   qr-code-generator-app --url http://www.njit.edu
 ```
 
-### With Volume Mounting
+### With Volume Mounting (Recommended)
 
-Mount a local directory to access generated QR codes:
+Mount the project directory to persist generated QR codes:
 ```bash
-docker run -d --name qr-generator \
-  -v /path/to/local/qr_codes:/app/qr_codes \
+docker run --rm --name qr-generator \
+  -v $(pwd)/qr_codes:/app/qr_codes \
   qr-code-generator-app --url http://github.com/kaw393939
 ```
+
+The QR codes will be saved in the `qr_codes/` directory in your project folder.
 
 ### Environment Variables
 
@@ -112,21 +114,23 @@ Example: qr_code_20251027_234234.png
 
 ### Accessing Generated QR Codes
 
-#### Option 1: Mount Volume to Local Machine (Recommended)
+#### Option 1: Mount Volume to Project Directory (Recommended)
 
-This is the best approach to persist QR codes on your local machine:
+This is the best approach to persist QR codes in your project directory:
 
 ```bash
-docker run -d --name qr-generator \
-  -v ~/qr_codes_output:/app/qr_codes \
+docker run --rm --name qr-generator \
+  -v $(pwd)/qr_codes:/app/qr_codes \
   kk795/qr-code-generator-app
 ```
 
-Then access the QR codes on your local machine:
+Then access the QR codes in your project directory:
 ```bash
-ls -lh ~/qr_codes_output/
-open ~/qr_codes_output/qr_code_*.png
+ls -lh qr_codes/
+open qr_codes/qr_code_*.png
 ```
+
+**Note:** The `qr_codes/` directory is already in `.gitignore`, so generated files won't be committed to the repository.
 
 #### Option 2: Copy from Running Container
 
